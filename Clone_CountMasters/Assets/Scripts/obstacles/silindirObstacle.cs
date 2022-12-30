@@ -1,10 +1,12 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class discObstacle : MonoBehaviour
+public class silindirObstacle : MonoBehaviour
 {
     void Start()
     {
-        LeanTween.rotateAround(this.gameObject, Vector3.up, -360f, 6f).setLoopClamp();
+        LeanTween.rotateAround(this.gameObject, Vector3.up, -360f, 5f).setLoopClamp();
     }
 
     private void OnTriggerEnter(Collider other)
