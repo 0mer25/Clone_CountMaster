@@ -81,7 +81,7 @@ public class PlayerManager : MonoBehaviour
             var x = distanceFactor * Mathf.Sqrt(i) * Mathf.Cos(i * radius);
             var z = distanceFactor * Mathf.Sqrt(i) * Mathf.Sin(i * radius);
 
-            var newPos = new Vector3(x, 1.56f, z);
+            var newPos = new Vector3(x, 0f, z);
             player.transform.GetChild(i).DOLocalMove(newPos, 1f).SetEase(Ease.OutBack);
         }
     }
