@@ -21,7 +21,7 @@ public class PlayerManager : MonoBehaviour
     private void Start() {
         cam = Camera.main;
         player = transform;
-        numberOfStickmans = transform.childCount - 1;
+        numberOfStickmans = transform.childCount - 2;
         CounterText.text = numberOfStickmans.ToString();
     }
 
@@ -29,7 +29,6 @@ public class PlayerManager : MonoBehaviour
     {
         MoveThePlayer();
     }
-
 
     void MoveThePlayer()
     {
@@ -63,6 +62,13 @@ public class PlayerManager : MonoBehaviour
                 var move = mousePos - mouseStartPos;
                 var control = playerStartPos + move;
 
+                if(numberOfStickmans < 50)
+                    control.x = Mathf.Clamp(control.x , -8f , 8f);
+                else if(numberOfStickmans > 100)
+                    control.x = Mathf.Clamp(control.x , -3f , 3f);
+                else
+                    control.x = Mathf.Clamp(control.x , -5f , 5f);
+
                 transform.position = new Vector3(Mathf.Lerp(transform.position.x, control.x, Time.deltaTime * playerSpeed)
                     , transform.position.y, transform.position.z);
             }
@@ -70,7 +76,9 @@ public class PlayerManager : MonoBehaviour
 
         if(gameState)
         {
-            road.Translate(-road.forward * Time.deltaTime * roadSpeed);
+            //road.Translate(-road.forward * Time.deltaTime * roadSpeed);
+
+            
         }
     }
 
@@ -93,7 +101,7 @@ public class PlayerManager : MonoBehaviour
             Instantiate(stickman , transform.position , Quaternion.identity , transform);
         }
 
-        numberOfStickmans = transform.childCount - 1;
+        numberOfStickmans = transform.childCount - 2;
         CounterText.text = numberOfStickmans.ToString();
 
         FormatStickman();
