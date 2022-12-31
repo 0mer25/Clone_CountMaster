@@ -10,7 +10,7 @@ public class PlayerManager : MonoBehaviour
     private int numberOfStickmans;
     [SerializeField] private TextMeshPro CounterText;
     [SerializeField] private GameObject stickman;
-    [Range(0f, 1f)] [SerializeField] private float distanceFactor, radius;
+    [Range(0f, 1f)] public float distanceFactor, radius;
 
     public bool moveByTouch, gameState;
     private Vector3 mouseStartPos, playerStartPos;
