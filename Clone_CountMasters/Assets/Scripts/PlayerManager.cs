@@ -5,6 +5,7 @@ using TMPro;
 using DG.Tweening;
 public class PlayerManager : MonoBehaviour
 {
+    public static PlayerManager instance;
     public Transform player;
     private int numberOfStickmans;
     [SerializeField] private TextMeshPro CounterText;
@@ -16,12 +17,18 @@ public class PlayerManager : MonoBehaviour
     public float playerSpeed, roadSpeed;
     private Camera cam;  
     [SerializeField] private Transform road;
+    public bool isFighting;
 
 
-    private void Start() {
+    void Awake() 
+    {
+        instance = this;
+    }
+    void Start() {
+        isFighting = false;
         cam = Camera.main;
         player = transform;
-        numberOfStickmans = transform.childCount - 2;
+        numberOfStickmans = transform.childCount - 1;
         CounterText.text = numberOfStickmans.ToString();
     }
 
@@ -74,15 +81,17 @@ public class PlayerManager : MonoBehaviour
             }
         }
 
-        if(gameState)
+        if(gameState && (isFighting == false))
         {
-            //road.Translate(-road.forward * Time.deltaTime * roadSpeed);
+            road.Translate(-road.forward * Time.deltaTime * roadSpeed);
 
-            
+
         }
+
+        
     }
 
-    private void FormatStickman()
+    public void FormatStickman(Transform player , float distanceFactor , float radius)
     {
         for (int i = 1; i < player.childCount ; i++)
         {
@@ -101,10 +110,10 @@ public class PlayerManager : MonoBehaviour
             Instantiate(stickman , transform.position , Quaternion.identity , transform);
         }
 
-        numberOfStickmans = transform.childCount - 2;
+        numberOfStickmans = transform.childCount - 1;
         CounterText.text = numberOfStickmans.ToString();
 
-        FormatStickman();
+        FormatStickman(player , distanceFactor , radius);
     }
 
     private void OnTriggerEnter(Collider other) {

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - npc
   - gate
+  - enemyArea
+  - enemy
   layers:
   - Default
   - TransparentFX

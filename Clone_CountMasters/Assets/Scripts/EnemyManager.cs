@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using DG.Tweening;
 
 public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private TextMeshPro CounterText;
     [SerializeField] private GameObject stickman;
     [Range(0f, 1f)] [SerializeField] private float distanceFactor, radius;
+    public Transform player;
 
 
     void Start()
@@ -18,6 +20,8 @@ public class EnemyManager : MonoBehaviour
         }
 
         CounterText.text = (transform.childCount - 1).ToString();
-    }    
+
+        PlayerManager.instance.FormatStickman(player , distanceFactor , radius);
+    }        
 
 }
