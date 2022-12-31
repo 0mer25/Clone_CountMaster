@@ -133,7 +133,7 @@ PrefabInstance:
     - target: {fileID: 723316543298086559, guid: bf13d3a9f76786c458a8fdf180ed8ed1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 723316543298086559, guid: bf13d3a9f76786c458a8fdf180ed8ed1,
         type: 3}
@@ -701,7 +701,8 @@ MonoBehaviour:
   playerSpeed: 2
   roadSpeed: 5
   road: {fileID: 1514944664}
-  isFighting: 0
+  enemy: {fileID: 0}
+  attack: 0
 --- !u!65 &568056474
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1034,8 +1035,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 200
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e7249e6f7a1b0c74999d520327a4c54f, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: e7249e6f7a1b0c74999d520327a4c54f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1124,7 +1125,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: 2180264, guid: e7249e6f7a1b0c74999d520327a4c54f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1173,6 +1174,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1514944664}
     m_Modifications:
+    - target: {fileID: 2557529226319660546, guid: 79956db8a4c9207478d4c8de6e578bde,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6450542733046891561, guid: 79956db8a4c9207478d4c8de6e578bde,
         type: 3}
       propertyPath: m_Name

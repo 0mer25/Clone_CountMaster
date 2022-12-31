@@ -17,7 +17,8 @@ public class PlayerManager : MonoBehaviour
     public float playerSpeed, roadSpeed;
     private Camera cam;  
     [SerializeField] private Transform road;
-    public bool isFighting;
+    [SerializeField] private Transform enemy;
+    public bool attack;
 
 
     void Awake() 
@@ -25,7 +26,6 @@ public class PlayerManager : MonoBehaviour
         instance = this;
     }
     void Start() {
-        isFighting = false;
         cam = Camera.main;
         player = transform;
         numberOfStickmans = transform.childCount - 1;
@@ -34,7 +34,58 @@ public class PlayerManager : MonoBehaviour
 
     private void Update() 
     {
-        MoveThePlayer();
+        if(attack)
+        {
+            var enemyDirection = new Vector3(enemy.position.x , transform.position.y , enemy.position.z) - transform.position;
+
+            for (int i = 1 ; i < transform.childCount ; i++)
+            {
+                transform.GetChild(i).rotation = Quaternion.Slerp(transform.GetChild(i).rotation , 
+                    Quaternion.LookRotation(enemyDirection , Vector3.up) , Time.deltaTime * 4f);
+            }
+
+            if(enemy.GetChild(1).childCount > 1)
+            {
+                for(int i = 0 ; i < transform.childCount ; i++)
+                {
+                    var distance = enemy.GetChild(1).GetChild(0).position - transform.GetChild(i).position;
+                    if(distance.magnitude < 5f)
+                    {
+                        transform.GetChild(i).position = Vector3.Lerp(transform.GetChild(i).position , 
+                            new Vector3(enemy.GetChild(1).GetChild(0).position.x , transform.GetChild(i).position.y , transform.GetChild(i).position.z) , 
+                                Time.deltaTime * 0.5f);
+                        
+                        
+                    }
+                }
+            }
+            else
+            {
+                attack = false;
+                roadSpeed = 5f;
+
+                for (int i = 1 ; i < transform.childCount ; i++)
+                {
+                    transform.GetChild(i).rotation = Quaternion.Slerp(transform.GetChild(i).rotation , Quaternion.identity , Time.deltaTime * 2f);
+                }
+
+                FormatStickman(player , distanceFactor , radius);
+
+                enemy.gameObject.SetActive(false);
+            }
+            
+        }
+        else
+        {
+            MoveThePlayer();
+        }
+
+        
+        if(gameState)
+        {
+            road.Translate(-road.forward * Time.deltaTime * roadSpeed);
+        }
+
     }
 
     void MoveThePlayer()
@@ -80,14 +131,6 @@ public class PlayerManager : MonoBehaviour
                     , transform.position.y, transform.position.z);
             }
         }
-
-        if(gameState && (isFighting == false))
-        {
-            road.Translate(-road.forward * Time.deltaTime * roadSpeed);
-
-
-        }
-
         
     }
 
@@ -131,6 +174,16 @@ public class PlayerManager : MonoBehaviour
             {
                 SpawnStickmans((numberOfStickmans + gateManager.randomNumber) - numberOfStickmans);
             }
+        }
+
+        if(other.CompareTag("enemyArea"))
+        {
+            enemy = other.transform;
+            attack = true;
+
+            roadSpeed = 3.5f;
+
+            other.transform.GetChild(1).GetComponent<EnemyManager>().AttackThem(transform);
         }
     }
 }
