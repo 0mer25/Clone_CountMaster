@@ -25,7 +25,7 @@ public class elHareketi : MonoBehaviour
     {
         if (Input.touchCount > 0)
         {
-            this.gameObject.transform.parent.gameObject.SetActive(false);
+            this.gameObject.transform.parent.gameObject.transform.parent.gameObject.SetActive(false);
         }
     }
 }
