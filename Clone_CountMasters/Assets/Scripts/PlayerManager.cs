@@ -14,11 +14,12 @@ public class PlayerManager : MonoBehaviour
 
     public bool moveByTouch, gameState;
     private Vector3 mouseStartPos, playerStartPos;
-    public float playerSpeed, roadSpeed;
-    private Camera cam;  
+    public float playerSpeed, roadSpeed, firstRoadSpeed;
+    private Camera cam;
+    [SerializeField] private GameObject towerCam;  
     [SerializeField] private Transform road;
     [SerializeField] private Transform enemy;
-    public bool attack;
+    public bool attack = false , finish = false;
 
 
     void Awake() 
@@ -28,6 +29,7 @@ public class PlayerManager : MonoBehaviour
     void Start() {
         cam = Camera.main;
         player = transform;
+        firstRoadSpeed = roadSpeed;
         numberOfStickmans = transform.childCount - 1;
         CounterText.text = numberOfStickmans.ToString();
     }
@@ -49,11 +51,11 @@ public class PlayerManager : MonoBehaviour
                 for(int i = 0 ; i < transform.childCount ; i++)
                 {
                     var distance = enemy.GetChild(1).GetChild(0).position - transform.GetChild(i).position;
-                    if(distance.magnitude < 5f)
+                    if(distance.magnitude < 10f)
                     {
                         transform.GetChild(i).position = Vector3.Lerp(transform.GetChild(i).position , 
                             new Vector3(enemy.GetChild(1).GetChild(0).position.x , transform.GetChild(i).position.y , transform.GetChild(i).position.z) , 
-                                Time.deltaTime * 0.5f);
+                                Time.deltaTime * 1f);
                         
                         
                     }
@@ -62,22 +64,36 @@ public class PlayerManager : MonoBehaviour
             else
             {
                 attack = false;
-                roadSpeed = 5f;
+                roadSpeed = firstRoadSpeed;
 
-                for (int i = 1 ; i < transform.childCount ; i++)
+                for (int i = 1; i < transform.childCount ; i++)
                 {
-                    transform.GetChild(i).rotation = Quaternion.Slerp(transform.GetChild(i).rotation , Quaternion.identity , Time.deltaTime * 2f);
+                    transform.GetChild(i).rotation = Quaternion.identity;
                 }
-
                 FormatStickman(player , distanceFactor , radius);
 
                 enemy.gameObject.SetActive(false);
+            }
+
+            if(transform.childCount == 1)
+            {
+                enemy.transform.GetChild(1).GetComponent<EnemyManager>().StopAttack();
+                gameObject.SetActive(false);
+
+                // Kaybettin ekranı
             }
             
         }
         else
         {
             MoveThePlayer();
+
+            if(transform.childCount == 1)
+            {
+                gameObject.SetActive(false);
+
+                // Kaybettin ekranı
+            }
         }
 
         
@@ -143,7 +159,19 @@ public class PlayerManager : MonoBehaviour
 
             var newPos = new Vector3(x, 0f, z);
             player.transform.GetChild(i).DOLocalMove(newPos, 1f).SetEase(Ease.OutBack);
-        }
+        }  
+        
+    }
+    public void FormatStickman()
+    {
+        for (int i = 1; i < this.player.childCount ; i++)
+        {
+            var x = this.distanceFactor * Mathf.Sqrt(i) * Mathf.Cos(i * this.radius);
+            var z = this.distanceFactor * Mathf.Sqrt(i) * Mathf.Sin(i * this.radius);
+
+            var newPos = new Vector3(x, 0f, z);
+            this.player.transform.GetChild(i).DOLocalMove(newPos, 1f).SetEase(Ease.OutBack);
+        }  
     }
 
     public void SpawnStickmans(int count)
@@ -181,9 +209,18 @@ public class PlayerManager : MonoBehaviour
             enemy = other.transform;
             attack = true;
 
-            roadSpeed = 3.5f;
+            roadSpeed = 5f;
 
             other.transform.GetChild(1).GetComponent<EnemyManager>().AttackThem(transform);
+        }
+
+
+        if(other.CompareTag("Finish"))
+        {
+            towerCam.SetActive(true);
+            finish = true;
+            FinishLineTower.instance.CreateTower(transform.childCount - 1);
+            transform.GetChild(0).gameObject.SetActive(false);
         }
     }
 }

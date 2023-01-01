@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class elHareketi : MonoBehaviour
+public class ElHareketi : MonoBehaviour
 {
     void Start()
     {
