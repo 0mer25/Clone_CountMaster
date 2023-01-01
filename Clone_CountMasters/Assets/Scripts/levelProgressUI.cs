@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class LevelProgressUI : MonoBehaviour
+public class levelProgressUI : MonoBehaviour
 {
     [Header("UI Ref")]
     [SerializeField] private Image uiFillImage;

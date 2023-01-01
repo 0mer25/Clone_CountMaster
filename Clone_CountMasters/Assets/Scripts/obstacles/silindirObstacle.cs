@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SilindirObstacle : MonoBehaviour
+public class silindirObstacle : MonoBehaviour
 {
     void Start()
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FinishLine : MonoBehaviour
+public class finishLine : MonoBehaviour
 {
 
     public GameObject levelSlider;
@@ -9,7 +9,7 @@ public class FinishLine : MonoBehaviour
     {
         if (other.gameObject.CompareTag("npc"))
         {
-            levelSlider.GetComponent<LevelProgressUI>().levelFinished = true;
+            levelSlider.GetComponent<levelProgressUI>().levelFinished = true;
         }
     }
 }

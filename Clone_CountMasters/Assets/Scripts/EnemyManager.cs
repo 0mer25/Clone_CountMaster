@@ -37,14 +37,11 @@ public class EnemyManager : MonoBehaviour
                 transform.GetChild(i).rotation = Quaternion.Slerp(transform.GetChild(i).rotation , 
                     Quaternion.LookRotation(enemyDirection , Vector3.up) , Time.deltaTime * 3f);
 
-                if(enemy.childCount > 1)
-                {
-                    var distance = enemy.GetChild(1).position - transform.GetChild(i).position;
+                var distance = enemy.GetChild(1).position - transform.GetChild(i).position;
 
-                    if(distance.magnitude < 10f)
-                    {
-                        transform.GetChild(i).position = Vector3.Lerp(transform.GetChild(i).position , enemy.GetChild(1).position , Time.deltaTime * 1f);
-                    }
+                if(distance.magnitude < 5f)
+                {
+                    transform.GetChild(i).position = Vector3.Lerp(transform.GetChild(i).position , enemy.GetChild(1).position , Time.deltaTime * 0.5f);
                 }
             }
         }
@@ -55,17 +52,7 @@ public class EnemyManager : MonoBehaviour
         enemy = enemyForce;
         attack = true;
 
-        // Animasyon eklenecek
+
     }     
-
-    public void StopAttack()
-    {
-        attack = false;
-
-        for(int i = 1 ; i < transform.childCount ; i++)
-        {
-            // Animasyonu durdur
-        }
-    }
 
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DiscObstacle : MonoBehaviour
+public class discObstacle : MonoBehaviour
 {
     void Start()
     {
