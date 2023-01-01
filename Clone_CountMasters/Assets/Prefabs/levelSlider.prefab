@@ -312,8 +312,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e7249e6f7a1b0c74999d520327a4c54f, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: e7249e6f7a1b0c74999d520327a4c54f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -429,11 +429,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8053724589179114126}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f40ace9ecfc6f34499a54a0896d5c0b, type: 3}
+  m_Script: {fileID: 11500000, guid: c95f1f63180051647b3dc21d5ef84e12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiFillImage: {fileID: 0}
-  levelText: {fileID: 0}
+  uiFillImage: {fileID: 5068330395048745805}
+  levelText: {fileID: 2602457239052099836}
   playerTransform: {fileID: 0}
   finishLineTransform: {fileID: 0}
   levelFinished: 0

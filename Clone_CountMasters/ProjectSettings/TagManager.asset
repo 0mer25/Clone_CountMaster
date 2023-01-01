@@ -8,6 +8,7 @@ TagManager:
   - gate
   - enemyArea
   - enemy
+  - stairs
   layers:
   - Default
   - TransparentFX

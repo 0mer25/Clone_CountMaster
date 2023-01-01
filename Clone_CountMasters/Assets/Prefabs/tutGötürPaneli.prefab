@@ -68,8 +68,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "TUT VE G\xD6T\xDCR"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e7249e6f7a1b0c74999d520327a4c54f, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: e7249e6f7a1b0c74999d520327a4c54f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -336,6 +336,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 3133753248721759904}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daf1302c0ded7b74a81dca826e5ca2d7, type: 3}
+  m_Script: {fileID: 11500000, guid: 279aedd71022613409da77cce4bed4ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

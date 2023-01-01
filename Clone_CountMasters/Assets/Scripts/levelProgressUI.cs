@@ -20,7 +20,7 @@ public class levelProgressUI : MonoBehaviour
 
     void Start()
     {
-        uiFillImage.fillAmount = 0.249f;
+        uiFillImage.fillAmount = 0f;
 
         // Sıfırıncı index'ten başlıyor +1 ekleyip 1.level olarak gösteriyorum.
         levelText.text = (SceneManager.GetActiveScene().buildIndex + 1).ToString();
@@ -35,24 +35,27 @@ public class levelProgressUI : MonoBehaviour
         {
             float newDistance = getDistance();
             float progressValue = Mathf.InverseLerp(fullDistance, 0.249f, newDistance);
-
             updateProgressFill(progressValue);
         }
     }
 
     private void updateProgressFill(float value)
     {
+        /*
         // fill, finish ikonunun arkasına gelmesin.
         if (value >= 0.75f)
         {
             value = 0.75f;
         }
+        */
 
+/*
         // fill, baştaki ui topunu doldursun
         if (value <= 0.249f)
         {
             value = 0.249f;
         }
+        */
 
         uiFillImage.fillAmount = value;
     }

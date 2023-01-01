@@ -6,7 +6,7 @@ using DG.Tweening;
 
 public class EnemyManager : MonoBehaviour
 {
-    [SerializeField] private TextMeshPro CounterText;
+    [SerializeField] public TextMeshPro CounterText;
     [SerializeField] private GameObject stickman;
     [Range(0f, 1f)] [SerializeField] private float distanceFactor, radius;
     public Transform player;
@@ -18,7 +18,7 @@ public class EnemyManager : MonoBehaviour
     {
         for(int i = 0 ; i < Random.Range(20,120) ; i++)
         {
-            Instantiate(stickman , transform.position , new Quaternion(0f , 100f , 0f , 1f) , transform);
+            Instantiate(stickman , transform.position , Quaternion.Euler(-90 , 0 , 0) , transform);
         }
 
         CounterText.text = (transform.childCount - 1).ToString();
@@ -27,22 +27,28 @@ public class EnemyManager : MonoBehaviour
     }   
 
     private void Update() {
-        if(attack && transform.childCount > 1)
+            //var enemyPos = new Vector3(enemy.position.x , -transform.position.y , enemy.position.z);
+
+        if (attack && transform.childCount > 1)
         {
-            var enemyPos = new Vector3(enemy.position.x , -transform.position.y , enemy.position.z);
             var enemyDirection = enemy.position - transform.position;
 
             for (int i = 0; i < transform.childCount; i++)
             {
-                transform.GetChild(i).rotation = Quaternion.Slerp(transform.GetChild(i).rotation , 
-                    Quaternion.LookRotation(enemyDirection , Vector3.up) , Time.deltaTime * 3f);
+                transform.GetChild(i).rotation = Quaternion.Slerp(transform.GetChild(i).rotation,Quaternion.LookRotation(enemyDirection,Vector3.up),
+                    Time.deltaTime * 3f);
 
-                var distance = enemy.GetChild(1).position - transform.GetChild(i).position;
-
-                if(distance.magnitude < 5f)
+                if (enemy.childCount > 1)
                 {
-                    transform.GetChild(i).position = Vector3.Lerp(transform.GetChild(i).position , enemy.GetChild(1).position , Time.deltaTime * 0.5f);
+                    var distance = enemy.GetChild(1).position - transform.GetChild(i).position;
+
+                    if (distance.magnitude < 10f)
+                    {
+                        transform.GetChild(i).position = Vector3.Lerp(transform.GetChild(i).position,
+                            enemy.GetChild(1).position,Time.deltaTime * 2f);
+                    } 
                 }
+              
             }
         }
     }
@@ -52,7 +58,20 @@ public class EnemyManager : MonoBehaviour
         enemy = enemyForce;
         attack = true;
 
-
+        /* for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).GetComponent<Animator>().SetBool("run",true);
+        } */
     }     
 
+    public void StopAttacking()
+    {
+         PlayerManager.instance.gameState =  attack = false;
+        
+        /* for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).GetComponent<Animator>().SetBool("run",false);
+        } */
+        
+    }
 }
