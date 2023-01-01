@@ -683,8 +683,8 @@ Camera:
   m_GameObject: {fileID: 151568489}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.5647059, g: 0.6, b: 0.87058824, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -948,7 +948,8 @@ MonoBehaviour:
   playerSpeed: 2
   roadSpeed: 5
   road: {fileID: 1514944664}
-  isFighting: 0
+  enemy: {fileID: 0}
+  attack: 0
 --- !u!65 &568056474
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1299,8 +1300,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 200
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e7249e6f7a1b0c74999d520327a4c54f, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: e7249e6f7a1b0c74999d520327a4c54f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1389,7 +1390,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: 2180264, guid: e7249e6f7a1b0c74999d520327a4c54f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
